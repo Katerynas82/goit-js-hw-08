@@ -2,42 +2,39 @@ import throttle from 'lodash.throttle';
 
 const LOCAL_STORAGE_KEY = 'feedback-form-state';
 
-const ref = {
-  form: document.querySelector('.feedback-form'),
-  input: document.querySelector('.feedback-form input'),
-  textarea: document.querySelector('.feedback-form textarea'),
-};
+const form = document.querySelector('.feedback-form');
+const inputEmail = document.querySelector('.feedback-form input');
+const feedbackMessage = document.querySelector('.feedback-form textarea');
 
-const formData = {};
+form.addEventListener('input', onInput);
+form.addEventListener('submit', throttle(throttledSubmit, 500));
 
-ref.form.addEventListener('input', evt => {
+function onInput(evt) {
+  const formData = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY)) || {};
+
   formData[evt.target.name] = evt.target.value;
-
   localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(formData));
-
-  console.log(evt.target.name);
-  console.log(evt.target.value);
-});
-
-// Не розумію, чому ця функція не працює...
-
-function populateFormFields() {
-  const savedFormData = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY));
-  if (savedFormData) {
-    ref.input.value = savedFormData.input || '';
-    ref.textarea.value = savedFormData.textarea || '';
-  }
 }
 
 const clearForm = function () {
   localStorage.removeItem(LOCAL_STORAGE_KEY);
-  ref.form.reset();
+  form.reset();
 };
+
+function populateFormFields() {
+  const savedFormData = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY));
+
+  if (savedFormData) {
+    inputEmail.value = savedFormData.email || '';
+    feedbackMessage.value = savedFormData.message || '';
+  }
+}
 
 function throttledSubmit(evt) {
   evt.preventDefault();
-  clearForm();
+  console.log(JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY)));
   populateFormFields();
+  clearForm();
 }
 
-ref.form.addEventListener('submit', throttle(throttledSubmit, 500));
+populateFormFields();
