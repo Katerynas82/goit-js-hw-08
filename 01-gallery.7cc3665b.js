@@ -2,5 +2,5 @@
    <a class="gallery__link" href="${e}">
       <img class="gallery__image" src="${t}" alt="${o}" width="800" height="600"/>
    </a>
-</li>`).join("");d.insertAdjacentHTML("afterbegin",c),d.style.cssText="list-style: none;",d.addEventListener("click",function(t){if(t.preventDefault(),!t.target.classList.contains("gallery__image"))return}),new(function(t){return t&&t.__esModule?t.default:t}(e))(".gallery a",{captionDelay:250,captionsData:"alt"});
-//# sourceMappingURL=01-gallery.f5df08ba.js.map
+</li>`).join("");d.insertAdjacentHTML("afterbegin",c),d.style.cssText="list-style: none;",new(function(t){return t&&t.__esModule?t.default:t}(e))(".gallery a",{captionDelay:250,captionsData:"alt"});
+//# sourceMappingURL=01-gallery.7cc3665b.js.map
