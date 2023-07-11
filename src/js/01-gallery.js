@@ -24,14 +24,14 @@ function createGallery(galleryItems) {
     .join('');
 }
 
-galleryList.addEventListener('click', onClick);
+// galleryList.addEventListener('click', onClick);
 
-function onClick(evt) {
-  evt.preventDefault();
-  if (!evt.target.classList.contains('gallery__image')) {
-    return;
-  }
-}
+// // // function onClick(evt) {
+// // //   evt.preventDefault();
+// // //   if (!evt.target.classList.contains('gallery__image')) {
+// // //     return;
+// // //   }
+// // }
 
 const lightbox = new SimpleLightbox('.gallery a', {
   captionDelay: 250,
